@@ -1,0 +1,20 @@
+{
+    "cortex-debug.variableUseNaturalFormat": false,
+    "editor.tabSize": 8,
+    "cortex-debug.registerUseNaturalFormat": false,
+    "spellright.language": [
+        "en",
+        "ru"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext",
+        "arm"
+    ],
+    "spellright.parserByClass": {
+        "arm": {
+            "parser": "code"
+        }
+    },
+}

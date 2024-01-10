@@ -1,0 +1,112 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "process",
+            "command": "make",
+            "icon": {
+                "id": "file-binary"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem"
+            },
+            "problemMatcher": [
+                {
+                    "owner": "gcc",
+                    "pattern": {
+                        "regexp": "^(.*?):(\\d+):(\\d*):?\\s+(?:fatal\\s+)?(warning|error):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5
+                    }
+                },
+                {
+                    "owner": "gcc-as",
+                    "pattern": {
+                        "regexp": "^(.*?):(\\d*):?\\s(Error|Warning)\\s*:\\s+(.+)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4
+                    }
+                },
+                {
+                    "owner": "gcc-as",
+                    "pattern": {
+                        "regexp": "^(.*?):\\s(Error|Warning):\\s+(.+)$",
+                        "file": 1,
+                        "severity": 2,
+                        "message": 3
+                    }
+                },
+                {
+                    "owner": "gcc-ld",
+                    "fileLocation": [
+                        "autoDetect",
+                        "${workspaceFolder}"
+                    ],
+                    "severity": "error",
+                    "pattern": {
+                        "regexp": "^(.*?):(\\d*):?\\s+(.+)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                }
+            ],
+            "detail": "Собрать проект"
+        },
+        {
+            "label": "clean",
+            "type": "process",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "icon": {
+                "id": "trash"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": [],
+            "detail": "Очистить проект"
+        },
+        {
+            "label": "disassemble",
+            "type": "process",
+            "icon": {
+                "id": "symbol-file"
+            },
+            "command": "make",
+            "args": ["main.lst"],
+            //"command": [
+            //    "arm-none-eabi-objdump.exe",
+            //    "-d",
+            //    "main.elf",
+            //    ">",
+            //    "main.lst"
+            //],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "group": "none",
+            "dependsOn": ["build"],
+            "detail": "Дизассемблировать программу в файл main.lst",
+            "problemMatcher": []
+        }
+    ]
+}
